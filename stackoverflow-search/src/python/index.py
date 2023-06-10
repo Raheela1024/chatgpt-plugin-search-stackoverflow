@@ -39,5 +39,5 @@ def setupAPI():
 
 def main():
     setupAPI()
-    prompt = "Human: Hello, who are you?\nAI:"
+    prompt = "Human: Hello, who are you? I'm a Robot\nAI:"
     print_response(prompt)
