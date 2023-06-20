@@ -1,43 +1,26 @@
-# connect to openai api and get the response
-# from the api
-def get_response(prompt):
+from dotenv import load_dotenv
+import os
+import openai
+
+
+# You need to have .env file in the same directory as this file with you 
+# OpenAI API key like this: OPENAI_API_KEY=your_api_key
+load_dotenv()
+
+api_key = os.getenv('OPENAI_API_KEY')
+
+openai.api_key = api_key
+
+def chat_with_gpt(message):
     response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt,
-        temperature=0.9,
-        max_tokens=150,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0.6,
-        stop=["\n", " Human:", " AI:"]
+      engine="text-ada-001",
+      prompt=message,
+      temperature=0.5,
+      max_tokens=100
     )
-    return response
 
-# write a python program to get the response from the api and print it
-def print_response(prompt):
-    response = get_response(prompt)
-    print(response.choices[0].text)
+    return response.choices[0].text.strip()
 
-# write a python program to get the response from the api and return it
-
-def get_response(prompt):
-    response = openai.Completion.create(
-        engine="davinci",
-        prompt=prompt,
-        temperature=0.9,
-        max_tokens=150,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0.6,
-        stop=["\n", " Human:", " AI:"]
-    )
-    return response.choices[0].text
-
-def setupAPI():
-    import openai
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-
-def main():
-    setupAPI()
-    prompt = "Human: Hello, who are you? I'm a Robot\nAI:"
-    print_response(prompt)
+user_message = input("User: ")
+gpt_response = chat_with_gpt(user_message)
+print("GPT: ", gpt_response)
