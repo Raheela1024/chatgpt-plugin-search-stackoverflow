@@ -39,7 +39,7 @@ def get_response(prompt):
     return response.choices[0].text
 
 
-def setupAPI():
+def setup_api():
     import openai
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -50,12 +50,12 @@ def get_joke():
 
 
 def main():
-    setupAPI()
+    setup_api()
     prompt = "Human: Hello, who are you? I'm a Robot\nAI:"
+    print_response(prompt)
     response = get_joke()
     if response.status_code == 200:
         print(response.text)
-    print_response(prompt)
 
 
 if __name__ == "__main__":
