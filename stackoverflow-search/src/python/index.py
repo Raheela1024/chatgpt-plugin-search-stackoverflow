@@ -33,7 +33,7 @@ def get_joke():
 user_message = input("User: ")
 gpt_response = chat_with_gpt(user_message)
 print("GPT: ", gpt_response)
-response = get_joke()
-if response.status_code == 200:
-    print(response.text)
+joke_response = get_joke()
+if joke_response.status_code == 200:
+    print(joke_response.text)
 
